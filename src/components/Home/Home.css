@@ -1,0 +1,19 @@
+.container {
+  margin: 2% 15%;
+}
+
+@keyframes slideFromBottom {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: 0.5s ease-out 0s 1 slideFromBottom;
+}
