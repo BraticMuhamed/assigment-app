@@ -1,4 +1,4 @@
-.container {
+.home-container {
   margin: 2% 15%;
 }
 
@@ -16,4 +16,13 @@
   flex-wrap: wrap;
   justify-content: center;
   animation: 0.5s ease-out 0s 1 slideFromBottom;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.header-title {
+  color: var(--darkwhite);
 }

@@ -8,7 +8,7 @@ import './Card.css';
 interface Props {
   item: Item;
   tab: string;
-  onClick: (id: number) => void 
+  onClick: (id: number) => void;
 }
 
 function Card({ item, tab, onClick }: Props): JSX.Element {
@@ -22,9 +22,13 @@ function Card({ item, tab, onClick }: Props): JSX.Element {
   const path = `${baseURL}${posterPath}`;
 
   return (
-    <div className="card-wrapper" onClick={() => onClick(item.id)}>
+    <div
+      className="card-wrapper"
+      onClick={() => onClick(item.id)}
+      data-testid={`card-${item.id}`}
+    >
       <Image src={path} />
-      <h3 className="title">{tab === 'movie' ? item.title : item.name}</h3>
+      <div className="title">{tab === 'movie' ? item.title : item.name}</div>
     </div>
   );
 }

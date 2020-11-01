@@ -1,5 +1,5 @@
 :root {
-  --darkgray: #333333;
+  --darkgray: #222222;
   --darkwhite: #eeeeee;
 }
 
@@ -13,7 +13,10 @@ body {
   background-color: var(--darkgray);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+footer {
+  color: var(--darkwhite);
+  margin: 2% 15%;
+  text-align: center;
+  border-top: 1px solid var(--darkwhite);
+  padding-top: 15px;
 }

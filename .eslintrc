@@ -5,10 +5,7 @@
     "./eslint/react-hooks.js",
     "prettier",
     "prettier/@typescript-eslint",
-    "prettier/react",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "prettier/react"
   ],
   "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
   "parser": "@typescript-eslint/parser",

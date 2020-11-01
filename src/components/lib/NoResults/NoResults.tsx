@@ -12,7 +12,7 @@ const NoResults: React.FC<Props> = ({ text }: Props) => {
 	return (
 		<div className="no-results-container">
 			<FontAwesomeIcon icon={faFrown} className="no-results-icon" />
-			<text>{text}</text>
+			<span>{text}</span>
 		</div>
 	)
 }

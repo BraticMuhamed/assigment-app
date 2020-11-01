@@ -16,6 +16,9 @@ const initState: ItemState = {
     overview: '',
     id: 0,
     poster_path: '',
+    videos: {
+      results: [],
+    },
   },
   isLoading: false,
   error: null,
@@ -36,7 +39,7 @@ function getItemFailed(state: ItemState, action: PayloadAction<string>): void {
 function setItemInit(state: ItemState): void {
   state.error = initState.error;
   state.isLoading = initState.isLoading;
-  state.result = initState.result
+  state.result = initState.result;
 }
 
 const itemSlice = createSlice({

@@ -6,8 +6,7 @@ interface Video {
 }
 
 interface Videos {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  results: Array<Video>
+  results: Array<Video | null>;
 }
 
 export interface Item {
@@ -16,14 +15,13 @@ export interface Item {
   name?: string;
   poster_path?: string;
   id: number;
-  videos?: Videos;
+  videos: Videos;
 }
 
 export interface Items {
   page: number;
   total_results: number;
   total_pages: number;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   results: Array<Item>;
 }
 
@@ -45,7 +43,7 @@ export const getItem = async (tab: string, id: number): Promise<Item> => {
   const url = `${tab}/${id}`;
   const params = {
     append_to_response: 'videos',
-  }
+  };
   const data = await instance.get<Item>(url, { params });
 
   return data.data;
@@ -60,7 +58,7 @@ export const searchItems = async (
   const params = {
     query: searchTerm,
     page,
-  }
+  };
   const data = await instance.get<Items>(url, { params });
 
   return data.data;

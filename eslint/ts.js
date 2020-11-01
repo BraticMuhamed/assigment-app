@@ -26,7 +26,6 @@ module.exports = {
       'error',
       {
         types: {
-          Array: null,
           Object: 'Use {} instead',
           String: {
             message: 'Use string instead',

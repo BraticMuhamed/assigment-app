@@ -7,7 +7,7 @@ import { Image, Button, Loader, NoResults } from '../lib';
 import { fetchItem, getItemInit } from '../../redux/itemSlice';
 import { Item } from '../../api/tmdbApi';
 import {
-  baseImageURL500,
+  baseImageURL342,
   noResultsItemText,
   tabs,
 } from '../../helpers/constants';
@@ -35,7 +35,7 @@ const Details: React.FC = () => {
       posterPath = '';
     }
 
-    return `${baseImageURL500}${posterPath}`;
+    return `${baseImageURL342}${posterPath}`;
   };
 
   const handlePushback = (): void => {
@@ -53,38 +53,41 @@ const Details: React.FC = () => {
     }
 
     const firstIndex = 0;
+    const obj = item.videos.results[firstIndex];
     let videoSrc = '';
 
-    if (item.videos && item.videos.results.length) {
+    if (obj) {
       videoSrc =
-        item.videos.results[firstIndex].site === 'YouTube'
-          ? `https://www.youtube.com/embed/${item.videos.results[firstIndex].key}`
-          : `https://www.vimeo.com/${item.videos.results[firstIndex].key}`;
+        obj.site === 'YouTube'
+          ? `https://www.youtube.com/embed/${obj.key}`
+          : `https://www.vimeo.com/${obj.key}`;
     }
 
     return (
       <>
-        {item.videos && item.videos.results.length ? (
-          <iframe
-            src={videoSrc}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            title="video"
-            className="details-video"
-          />
-        ) : (
-          <Image src={getSrc(item)} />
-        )}
+        <div className="media-wrapper">
+          {item.videos.results.length ? (
+            <iframe
+              src={videoSrc}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              title="video"
+              className="details-video"
+            />
+          ) : (
+            <Image src={getSrc(item)} />
+          )}
+        </div>
         <h1>Title: {tab === tabs.movie.key ? item.title : item.name}</h1>
-        <text className="details-overview-title">Overview:</text>
+        <span className="details-overview-title">Overview:</span>
         <textarea readOnly value={item.overview} className="details-textarea" />
       </>
     );
   };
 
   return (
-    <div className="details-container">
+    <div className="details-container" data-testid="details">
       <Button label="Back" onClick={handlePushback} isPushBack />
       {renderChild()}
     </div>

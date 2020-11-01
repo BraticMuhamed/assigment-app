@@ -1,4 +1,5 @@
 .image {
 	height: 325px;
 	width: 100%;
+	background-color: var(--darkwhite);
 }

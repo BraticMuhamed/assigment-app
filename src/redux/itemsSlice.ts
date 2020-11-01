@@ -10,15 +10,15 @@ export interface ItemsState {
 }
 
 const initState: ItemsState = {
-    results: {
-		page: 1,
-		total_pages: 0,
-		total_results: 0,
-		results: [],
-	},
-    isLoading: false,
-    error: null,
-}
+  results: {
+    page: 1,
+    total_pages: 0,
+    total_results: 0,
+    results: [],
+  },
+  isLoading: false,
+  error: null,
+};
 
 function getItemsLoading(state: ItemsState): void {
   state.isLoading = true;
@@ -61,8 +61,10 @@ export const fetchItems = (tab: string): AppThunk => async dispatch => {
   try {
     dispatch(getItemsRequest());
 
-    const startLength = 0, endLength = 10;
+    const startLength = 0,
+      endLength = 10;
     const data = await getItems(tab);
+
     data.results = data.results.slice(startLength, endLength);
 
     dispatch(getItemsSuccess(data));
@@ -71,7 +73,11 @@ export const fetchItems = (tab: string): AppThunk => async dispatch => {
   }
 };
 
-export const searchItems = (tab: string, searchTerm: string, page: number): AppThunk => async dispatch => {
+export const searchItems = (
+  tab: string,
+  searchTerm: string,
+  page: number
+): AppThunk => async dispatch => {
   try {
     dispatch(getItemsRequest());
 
@@ -79,6 +85,6 @@ export const searchItems = (tab: string, searchTerm: string, page: number): AppT
 
     dispatch(getItemsSuccess(data));
   } catch (error) {
-    dispatch(getItemsFailure(error))
+    dispatch(getItemsFailure(error));
   }
-}
+};

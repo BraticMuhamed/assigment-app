@@ -17,6 +17,7 @@ import {
   isSearchable,
   searchTimeout,
   tabs,
+  mainTitle,
 } from '../../helpers/constants';
 
 import './Home.css';
@@ -92,22 +93,30 @@ class Home extends PureComponent<Props, State> {
     history.push(`/${tab}/${id}`);
   };
 
-  handlePageChange = (id: number): void => {
+  handlePageChange = (id?: number): void => {
     const { searchItems, tab, searchTerm } = this.props;
+    let index = 1;
 
-    this.setState({ page: id });
+    if (id !== undefined) {
+      index = id;
+    }
+
+    this.setState({ page: index });
 
     if (isSearchable(searchTerm)) {
-      searchItems(tab, searchTerm, id)
+      searchItems(tab, searchTerm, index);
     }
-  }
+  };
 
   render(): JSX.Element {
     const { changeTab, items, tab, isLoading, searchTerm } = this.props;
     const { searchTermState, page } = this.state;
 
     return (
-      <div className="container">
+      <div className="home-container" data-testid="home-component">
+        <header className="header-wrapper">
+          <h1 className="header-title">{mainTitle}</h1>
+        </header>
         <Tabs>
           <Button
             label={tabs.tv.label}
@@ -129,7 +138,7 @@ class Home extends PureComponent<Props, State> {
           <NoResults text={noResultsText} />
         )}
         {!isLoading && (
-          <div className="cards-container">
+          <div className="cards-container" data-testid="cards-container">
             {items.results.map(item => {
               let key = item.name;
 
@@ -148,12 +157,9 @@ class Home extends PureComponent<Props, State> {
             })}
           </div>
         )}
-        {/* {searchTerm.length && (
-          <Pagination
-            currentPage={page}
-            onPageChange={this.handlePageChange}
-          />
-        )} */}
+        {isSearchable(searchTerm) && (
+          <Pagination currentPage={page} onPageChange={this.handlePageChange} />
+        )}
       </div>
     );
   }
